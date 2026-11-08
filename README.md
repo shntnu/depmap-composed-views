@@ -5,7 +5,7 @@ The model chooses the report's components, while Python notebook helpers supply 
 Inspired by Vercel's [json-render and Chat SDK announcement](https://vercel.com/changelog/json-render-and-chat-sdk-agents).
 
 [Open the demo](https://depmap-composed-views.vercel.app/) while signed into the authorized Vercel account.
-The source repository is [shntnu/depmap-composed-views](https://github.com/shntnu/depmap-composed-views), a private personal repository.
+The source repository is [shntnu/depmap-composed-views](https://github.com/shntnu/depmap-composed-views), a public personal repository.
 
 ## Try it
 
