@@ -6,6 +6,7 @@ import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { streamText } from 'ai';
 import { createOpenRouter } from '@openrouter/ai-sdk-provider';
+import { createAnthropic } from '@ai-sdk/anthropic';
 import { compileSpecStream } from '@json-render/core';
 import { z } from 'zod';
 import { catalog, presetSpec, querySchema, validateReport } from './catalog.mjs';
@@ -15,9 +16,14 @@ const directory = path.dirname(fileURLToPath(import.meta.url));
 const runFile = promisify(execFile);
 const app = express();
 const hosted = process.env.VERCEL === '1';
-const useGateway = hosted || Boolean(process.env.AI_GATEWAY_API_KEY);
-const model = process.env.AI_MODEL || process.env.OPENROUTER_MODEL || 'anthropic/claude-haiku-4.5';
-const modelAvailable = useGateway || Boolean(process.env.OPENROUTER_API_KEY);
+const provider = z.enum(['anthropic', 'gateway', 'openrouter']).parse(process.env.AI_PROVIDER ||
+  (hosted || process.env.AI_GATEWAY_API_KEY ? 'gateway' : 'openrouter'));
+const model = process.env.AI_MODEL || (provider === 'anthropic' ? 'claude-haiku-5-5' :
+  process.env.OPENROUTER_MODEL || 'anthropic/claude-haiku-4.5');
+const modelAvailable = provider === 'anthropic' ? Boolean(process.env.ANTHROPIC_API_KEY) :
+  provider === 'gateway' ? hosted || Boolean(process.env.AI_GATEWAY_API_KEY) : Boolean(process.env.OPENROUTER_API_KEY);
+const credentialHelp = provider === 'anthropic' ? 'Set ANTHROPIC_API_KEY in the server environment' :
+  provider === 'gateway' ? 'Enable Vercel AI Gateway credentials' : 'Set OPENROUTER_API_KEY in the server environment';
 const snapshots = { 'KRAS/Lung': 'kras-lung.json', 'BRAF/Skin': 'braf-skin.json', 'EGFR/Lung': 'egfr-lung.json' };
 const requestSchema = querySchema.extend({ source: z.enum(['snapshot', 'live']).default('snapshot') });
 let busy = false;
@@ -32,7 +38,7 @@ app.use('/api', (req, res, next) => {
   next();
 });
 app.use(express.json({ limit: '16kb' }));
-app.get('/api/config', (_req, res) => res.json({ modelAvailable, model, snapshots: Object.keys(snapshots),
+app.get('/api/config', (_req, res) => res.json({ modelAvailable, model, provider, snapshots: Object.keys(snapshots),
   presets: ['overview', 'ranked', 'missing', 'evidence'].map(id => ({ id, label: id, gene: 'KRAS', lineage: 'Lung', view: id })) }));
 
 async function retrieve(query, source) {
@@ -68,7 +74,7 @@ async function retrieve(query, source) {
 
 async function resultFor(spec, source, mode) {
   const evidence = await retrieve(spec.elements[spec.root].props, source);
-  return { spec, evidence, mode, source, ...(mode === 'model' ? { model } : {}), ...makeChatCard(evidence, spec) };
+  return { spec, evidence, mode, source, ...(mode === 'model' ? { model, provider } : {}), ...makeChatCard(evidence, spec) };
 }
 
 app.post('/api/preset', async (req, res) => {
@@ -81,7 +87,7 @@ app.post('/api/preset', async (req, res) => {
 app.post('/api/generate', async (req, res) => {
   const parsed = requestSchema.extend({ prompt: z.string().trim().min(1).max(2000) }).strict().safeParse(req.body);
   if (!parsed.success) return res.status(400).json({ error: 'Supply a question, gene, lineage and data source.' });
-  if (!modelAvailable) return res.status(503).json({ error: 'Set OPENROUTER_API_KEY in the server environment to enable AI composition. Presets work without it.' });
+  if (!modelAvailable) return res.status(503).json({ error: `${credentialHelp} to enable AI composition. Presets work without model credentials.` });
   if (busy) return res.status(429).json({ error: 'A composition is already running. Try again when it finishes.' });
   busy = true;
   res.set({ 'Content-Type': 'text/event-stream', 'Connection': 'keep-alive', 'X-Accel-Buffering': 'no' });
@@ -93,7 +99,8 @@ app.post('/api/generate', async (req, res) => {
   try {
     const { prompt, gene, lineage, source } = parsed.data;
     send({ type: 'status', message: 'Composing a view from the allowed scientific components...' });
-    const languageModel = useGateway ? model : createOpenRouter({ apiKey: process.env.OPENROUTER_API_KEY })(model);
+    const languageModel = provider === 'anthropic' ? createAnthropic({ apiKey: process.env.ANTHROPIC_API_KEY })(model) :
+      provider === 'gateway' ? model : createOpenRouter({ apiKey: process.env.OPENROUTER_API_KEY })(model);
     const instructions = catalog.prompt({ customRules: [
       'This is a scientific report. Never generate sample data, scientific values, text claims, state, expressions, actions, bindings, visibility, repeat, or event handlers. This overrides generic sample-data instructions.',
       'Output only JSONL patches to /root and /elements. The completed spec has EXACTLY root and elements. Do not add state, even an empty state.',
@@ -107,6 +114,7 @@ app.post('/api/generate', async (req, res) => {
     const response = streamText({ model: languageModel, system: instructions,
       prompt: `Defaults when unspecified: gene=${gene}, lineage=${lineage}. User question (takes precedence over defaults): ${prompt}`,
       maxOutputTokens: 1500, maxRetries: 0, abortSignal: abort.signal,
+      ...(provider === 'anthropic' ? { providerOptions: { anthropic: { thinking: { type: 'disabled' }, effort: 'medium' } } } : {}),
       onError: ({ error }) => { modelFailure = error; } });
     let output = '';
     for await (const text of response.textStream) {

@@ -30,10 +30,14 @@ npm --prefix web ci
 npm --prefix web run dev
 ```
 
-Open <http://127.0.0.1:4317/>. To enable local AI composition, supply `OPENROUTER_API_KEY` through the process environment before starting the server.
+Open <http://127.0.0.1:4317/>. To use Anthropic directly, set `AI_PROVIDER=anthropic` and supply `ANTHROPIC_API_KEY` through the process environment before starting the server.
+The direct Anthropic default is `claude-haiku-5-5`; `AI_MODEL` can select another supported Anthropic model.
 Keep credentials out of files and frontend variables.
-`OPENROUTER_MODEL` or `AI_MODEL` can select a supported model; the default is `anthropic/claude-haiku-4.5`.
-Requests are capped at 1,500 output tokens and model failures are shown explicitly.
+Requests are capped at 1,500 output tokens, with thinking disabled for this short composition task, and model failures are shown explicitly.
+
+When `AI_PROVIDER` is omitted, the original defaults remain: local runs use `OPENROUTER_API_KEY`, and Vercel deployments use AI Gateway.
+Those defaults use `anthropic/claude-haiku-4.5`, overridden by `AI_MODEL` or `OPENROUTER_MODEL`.
+Explicit `AI_PROVIDER=anthropic` never falls back to another provider when its key is missing or a request fails.
 
 For a local production build:
 
@@ -59,11 +63,15 @@ Its `DEPMAP_SERVICE_URL` binding reaches the private Python `depmap` service, wh
 Vercel Services is currently Beta.
 The web service explicitly serves built assets because the service rewrite routes asset requests through Express.
 
-Hosted model calls use Vercel AI Gateway with the deployment's automatically supplied identity.
-No OpenRouter key is needed on Vercel.
-Keep project OIDC enabled and Node set to 22 or later.
-Gateway availability depends on the team's account eligibility and credits.
-`AI_MODEL` optionally overrides the model name.
+The production demo uses `AI_PROVIDER=anthropic`, `AI_MODEL=claude-haiku-5-5`, and a server-only `ANTHROPIC_API_KEY` stored in the project's production environment.
+Model calls go directly to Anthropic and use the selected Anthropic account's credits or billing.
+They do not use Vercel AI Gateway credits or silently fall back to another billing account.
+Vercel still hosts the application and its Python service.
+Keep Node set to 22 or later.
+
+For other installations, omitting `AI_PROVIDER` preserves Vercel AI Gateway with the deployment's automatically supplied identity.
+That mode requires project OIDC and available Gateway credits; `AI_PROVIDER=gateway` also selects it explicitly.
+`AI_PROVIDER=openrouter` explicitly selects the original OpenRouter connection.
 
 Keep Vercel Authentication enabled to control access to hosted model calls.
 The server's busy flag limits one running instance, not total account spending.
@@ -126,6 +134,6 @@ uv run --project python --with httpx python -m unittest discover -s web -p test_
 uv run --project python --with httpx python -m unittest discover -s python/tests -p test_service.py -v
 ```
 
-These checks cover schema restrictions, graph validity, missingness, evidence integrity, Chat SDK conversion and streaming, hosted asset delivery, same-origin checks, service calls and explicit upstream errors.
+These checks cover schema restrictions, graph validity, missingness, evidence integrity, Chat SDK conversion and streaming, hosted asset delivery, same-origin checks, service calls, direct Anthropic selection without provider fallback, and explicit upstream errors.
 Live AI composition and Breadbox retrieval were also verified in the deployed prototype.
 Slack and Teams delivery are outside this demo.
