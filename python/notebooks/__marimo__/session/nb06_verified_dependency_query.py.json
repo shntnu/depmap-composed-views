@@ -1,0 +1,145 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.25.2",
+    "script_metadata_hash": "7d68494296bd9703105f7fd40516d5fe"
+  },
+  "cells": [
+    {
+      "id": "setup",
+      "code_hash": "c325777460ac2666fbd6d9299c2bfc0d",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Hbol",
+      "code_hash": "6f48d7480095e264c4a7e8201f666032",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"verified-depmap-retrieval\">Verified DepMap retrieval</h1>\n<span class=\"paragraph\">Resolve a gene and lineage, check the returned identifiers and missingness,\nand preserve a machine-readable evidence record alongside the values.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "MJUe",
+      "code_hash": "f6d8cc09bfa2e2d79d294e984b6fbea9",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "vblA",
+      "code_hash": "367874878e1e3c9f5bb33674690661eb",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "bkHC",
+      "code_hash": "73932726eac4956e6a00a50306cd39d2",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "lEQa",
+      "code_hash": "e791025395d204a301bb3c1e8209126f",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='lEQa-8' random-id='58b2f0e5-5f3a-ca76-210d-19217fb948c9'><marimo-form data-initial-value='null' data-label='null' data-element-id='&quot;lEQa-7&quot;' data-loading='false' data-bordered='true' data-submit-button-label='&quot;Retrieve and verify&quot;' data-submit-button-disabled='false' data-clear-on-submit='false' data-show-clear-button='false' data-clear-button-label='&quot;Clear&quot;' data-should-validate='false'><marimo-ui-element object-id='lEQa-7' random-id='72dffb32-60d0-82a4-a219-18f5b49bd86e'><marimo-dict data-initial-value='{&quot;gene&quot;:&quot;KRAS&quot;,&quot;lineage&quot;:&quot;Lung&quot;}' data-label='null' data-element-ids='{&quot;lEQa-5&quot;:&quot;gene&quot;,&quot;lEQa-6&quot;:&quot;lineage&quot;}'><marimo-json-output data-json-data='{&quot;gene&quot;:&quot;text/html:&#92;u003cmarimo-ui-element object-id=&#x27;lEQa-5&#x27; random-id=&#x27;f75fd8f7-1c29-e5e1-4dc5-8df547c8a4f1&#x27;&#92;u003e&#92;u003cmarimo-text data-initial-value=&#x27;&amp;quot;KRAS&amp;quot;&#x27; data-label=&#x27;&amp;quot;&amp;#92;u003cspan class=&amp;#92;&amp;quot;markdown prose dark:prose-invert contents&amp;#92;&amp;quot;&amp;#92;u003e&amp;#92;u003cspan class=&amp;#92;&amp;quot;paragraph&amp;#92;&amp;quot;&amp;#92;u003eExact gene symbol&amp;#92;u003c/span&amp;#92;u003e&amp;#92;u003c/span&amp;#92;u003e&amp;quot;&#x27; data-placeholder=&#x27;&amp;quot;&amp;quot;&#x27; data-kind=&#x27;&amp;quot;text&amp;quot;&#x27; data-full-width=&#x27;false&#x27; data-disabled=&#x27;false&#x27; data-debounce=&#x27;true&#x27;&#92;u003e&#92;u003c/marimo-text&#92;u003e&#92;u003c/marimo-ui-element&#92;u003e&quot;,&quot;lineage&quot;:&quot;text/html:&#92;u003cmarimo-ui-element object-id=&#x27;lEQa-6&#x27; random-id=&#x27;5ef68d27-2f59-008a-f8f4-68e648d3f394&#x27;&#92;u003e&#92;u003cmarimo-text data-initial-value=&#x27;&amp;quot;Lung&amp;quot;&#x27; data-label=&#x27;&amp;quot;&amp;#92;u003cspan class=&amp;#92;&amp;quot;markdown prose dark:prose-invert contents&amp;#92;&amp;quot;&amp;#92;u003e&amp;#92;u003cspan class=&amp;#92;&amp;quot;paragraph&amp;#92;&amp;quot;&amp;#92;u003eExact Oncotree lineage&amp;#92;u003c/span&amp;#92;u003e&amp;#92;u003c/span&amp;#92;u003e&amp;quot;&#x27; data-placeholder=&#x27;&amp;quot;&amp;quot;&#x27; data-kind=&#x27;&amp;quot;text&amp;quot;&#x27; data-full-width=&#x27;false&#x27; data-disabled=&#x27;false&#x27; data-debounce=&#x27;true&#x27;&#92;u003e&#92;u003c/marimo-text&#92;u003e&#92;u003c/marimo-ui-element&#92;u003e&quot;}' data-value-types='&quot;python&quot;' data-name='&quot;dictionary&quot;'></marimo-json-output></marimo-dict></marimo-ui-element></marimo-form></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "PKri",
+      "code_hash": "079bc481edf89da9ef2025faa4009843",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Xref",
+      "code_hash": "55f7d29faaba1f44178f8dec38c19c69",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<div style='display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"kras-in-lung\">KRAS in Lung</h2>\n<span class=\"paragraph\">More negative Chronos gene effect indicates stronger dependency; missing values are not zero.</span></span><span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">All cohort models are accounted for. Dataset absence and null scores stay explicit.</span></span><marimo-ui-element object-id='Xref-0' random-id='06abe66b-57a9-d6c1-b8e5-95b4c61d96d4'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;cohort&#92;&quot;:269,&#92;&quot;present_in_dataset&#92;&quot;:126,&#92;&quot;observed&#92;&quot;:126,&#92;&quot;null_score&#92;&quot;:0,&#92;&quot;absent_from_dataset&#92;&quot;:143}]&quot;' data-total-rows='1' data-total-columns='5' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;cohort&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;present_in_dataset&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;observed&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;null_score&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;absent_from_dataset&quot;,[&quot;integer&quot;,&quot;i64&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element><marimo-callout-output data-html='&quot;&#92;u003cspan class=&#92;&quot;markdown prose dark:prose-invert contents&#92;&quot;&#92;u003e&#92;u003cspan class=&#92;&quot;paragraph&#92;&quot;&#92;u003eChronos_Combined: observed release &#x27;26Q3&#x27;; catalog baseline 26Q1.&#92;ndepmap_model_metadata: observed release &#x27;26Q3&#x27;; catalog baseline 26Q1.&#92;u003c/span&#92;u003e&#92;u003c/span&#92;u003e&quot;' data-kind='&quot;warn&quot;'></marimo-callout-output></div>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "SFPL",
+      "code_hash": "702798a0ac4c673aba4650cb61d08b7f",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<div style='display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"model-preview\">Model preview</h3>\n<span class=\"paragraph\">First 20 models by ID; the JSON download contains every cohort model. Missing scores are not evidence of no dependency.</span></span><marimo-ui-element object-id='SFPL-0' random-id='b8039d27-0335-2a5e-e9fe-9a54fc2f7f28'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;depmap_id&#92;&quot;:&#92;&quot;ACH-000012&#92;&quot;,&#92;&quot;dependency&#92;&quot;:-0.2951101522,&#92;&quot;status&#92;&quot;:&#92;&quot;observed&#92;&quot;,&#92;&quot;cell_line_name&#92;&quot;:&#92;&quot;HCC-827&#92;&quot;},{&#92;&quot;depmap_id&#92;&quot;:&#92;&quot;ACH-000015&#92;&quot;,&#92;&quot;dependency&#92;&quot;:-0.5335802023,&#92;&quot;status&#92;&quot;:&#92;&quot;observed&#92;&quot;,&#92;&quot;cell_line_name&#92;&quot;:&#92;&quot;NCI-H1581&#92;&quot;},{&#92;&quot;depmap_id&#92;&quot;:&#92;&quot;ACH-000021&#92;&quot;,&#92;&quot;dependency&#92;&quot;:-0.4145745127,&#92;&quot;status&#92;&quot;:&#92;&quot;observed&#92;&quot;,&#92;&quot;cell_line_name&#92;&quot;:&#92;&quot;NCI-H1693&#92;&quot;},{&#92;&quot;depmap_id&#92;&quot;:&#92;&quot;ACH-000029&#92;&quot;,&#92;&quot;dependency&#92;&quot;:-0.25012285,&#92;&quot;status&#92;&quot;:&#92;&quot;observed&#92;&quot;,&#92;&quot;cell_line_name&#92;&quot;:&#92;&quot;HCC-827-GR5&#92;&quot;},{&#92;&quot;depmap_id&#92;&quot;:&#92;&quot;ACH-000030&#92;&quot;,&#92;&quot;dependency&#92;&quot;:-0.277481714,&#92;&quot;status&#92;&quot;:&#92;&quot;observed&#92;&quot;,&#92;&quot;cell_line_name&#92;&quot;:&#92;&quot;PC-14&#92;&quot;},{&#92;&quot;depmap_id&#92;&quot;:&#92;&quot;ACH-000033&#92;&quot;,&#92;&quot;dependency&#92;&quot;:null,&#92;&quot;status&#92;&quot;:&#92;&quot;absent_from_dataset&#92;&quot;,&#92;&quot;cell_line_name&#92;&quot;:&#92;&quot;NCI-H1819&#92;&quot;},{&#92;&quot;depmap_id&#92;&quot;:&#92;&quot;ACH-000035&#92;&quot;,&#92;&quot;dependency&#92;&quot;:-0.4196331137,&#92;&quot;status&#92;&quot;:&#92;&quot;observed&#92;&quot;,&#92;&quot;cell_line_name&#92;&quot;:&#92;&quot;NCI-H1650&#92;&quot;},{&#92;&quot;depmap_id&#92;&quot;:&#92;&quot;ACH-000062&#92;&quot;,&#92;&quot;dependency&#92;&quot;:null,&#92;&quot;status&#92;&quot;:&#92;&quot;absent_from_dataset&#92;&quot;,&#92;&quot;cell_line_name&#92;&quot;:&#92;&quot;RERF-LC-MS&#92;&quot;},{&#92;&quot;depmap_id&#92;&quot;:&#92;&quot;ACH-000064&#92;&quot;,&#92;&quot;dependency&#92;&quot;:null,&#92;&quot;status&#92;&quot;:&#92;&quot;absent_from_dataset&#92;&quot;,&#92;&quot;cell_line_name&#92;&quot;:&#92;&quot;SALE&#92;&quot;},{&#92;&quot;depmap_id&#92;&quot;:&#92;&quot;ACH-000066&#92;&quot;,&#92;&quot;dependency&#92;&quot;:null,&#92;&quot;status&#92;&quot;:&#92;&quot;absent_from_dataset&#92;&quot;,&#92;&quot;cell_line_name&#92;&quot;:&#92;&quot;HCC4006&#92;&quot;}]&quot;' data-total-rows='20' data-total-columns='4' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='true' data-page-size='10' data-field-types='[[&quot;depmap_id&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;dependency&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;status&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;cell_line_name&quot;,[&quot;string&quot;,&quot;str&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='true' data-show-data-types='true' data-show-page-size-selector='true' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element></div>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "BYtC",
+      "code_hash": "1a8597a0662baed2b39d3b265f935fa8",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "RGSE",
+      "code_hash": "309b931e0ba58505ce97c5651846887c",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"reuse-this-workflow\">Reuse this workflow</h3>\n<span class=\"paragraph\">From this repository checkout, import <code>verified_dependency_query</code> from this notebook to get a plain JSON-compatible dictionary.\nUse <code>expected_release=\"26Q3\"</code> to require that release in both source datasets; a mismatch raises an error.\nThe argument checks the live release and does not select historical data.\nGene symbols and lineage names must match exactly; discovery candidates are never silently selected.</span>\n<span class=\"paragraph\">The checks compare server context membership to independently filtered metadata and compare every returned matrix ID to the requested dataset intersection.\nThey detect disagreement, missing rows, extra rows, wrong features, and non-finite values.\nThey cannot establish atomic consistency across live requests or detect an upstream omission shared by both endpoints.\nSee <code>docs/agent-readiness.md</code> in this repository for the broader task benchmark and upstream work.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    }
+  ]
+}

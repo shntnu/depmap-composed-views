@@ -1,18 +1,28 @@
 # DepMap composed views
 
-A prototype that lets a language model choose how to present one notebook's DepMap results.
-It supports one gene within one lineage and descriptive dependency scores.
+This prototype explores two bets for working with a scientific agent: an executable notebook as the shared workspace, and a structured interface assembled over reusable analysis functions.
+It makes the comparison concrete with one DepMap query for a gene within a lineage.
+
+Scientists need to inspect an agent's work and keep exploring after its first answer.
+[JX](https://github.com/broadinstitute/jx), a project for exploring JUMP Cell Painting data, makes one bet: the notebook can be the place to read an analysis, interact with it, and produce the next one.
+
+In [JX's notebook approach](https://github.com/broadinstitute/jx/blob/main/PLAN.md#hypothesis), an agent draws on a catalog of reusable analyses, writes Python cells, and runs them in a marimo notebook.
+Code, explanations, and outputs stay together in a document the scientist can inspect and rerun.
+Follow-up questions can extend that notebook with more cells.
+The notebook is both a working surface and a durable result.
+
+This demo explores another bet: the agent can compose a structured interface over reusable analysis functions.
+With json-render, the model describes a view using allowed charts, tables, and evidence components, and the app renders it.
+Both approaches reuse scientific code and can offer interactive controls.
+Here the model produces a description of the interface, while the existing functions perform the analysis.
+
+We are trying that second approach with one DepMap query from [DMX](https://github.com/broadinstitute/dmx), JX's sibling notebook catalog.
+[View the rendered notebook and its recorded results](https://molab.marimo.io/github/shntnu/depmap-composed-views/blob/main/python/notebooks/nb06_verified_dependency_query.py), then try the web interface.
+The notebook, [Verified DepMap retrieval (nb06)](python/notebooks/nb06_verified_dependency_query.py), retrieves published dependency scores for one gene within one lineage, checks cell-line identifiers and missing scores, and records the data sources.
+The rendered preview uses a saved session snapshot; fresh retrieval requires running the notebook or choosing Breadbox in the app.
+In this prototype, the user chooses the query and the model chooses how to display its results.
 It is a working interface experiment, not the full DepMap portal or a system that creates new analyses.
-
-Researchers may want a distribution, a ranked table, or a report of missing scores from the same analysis.
-Changing that presentation in a notebook can mean editing code.
-We built this prototype to test whether a language model could choose the presentation while the notebook retrieves and checks the data.
-
-The demo uses [Verified DepMap retrieval (nb06)](python/notebooks/nb06_verified_dependency_query.py) from DMX, a catalog of reusable analysis notebooks.
-The notebook retrieves published dependency scores for one gene within one lineage, checks cell-line identifiers and missing scores, and records the data sources.
-The model selects from a small set of display components; the notebook supplies the measurements, and fixed application code draws the charts.
-The result is a report built from the same query, with downloadable source evidence.
-New analyses still need additional notebook code.
+New scientific questions still need additional analysis code.
 
 The interface uses [json-render](https://json-render.dev/) and was inspired by Vercel's [json-render and Chat SDK announcement](https://vercel.com/changelog/json-render-and-chat-sdk-agents).
 The source repository is [shntnu/depmap-composed-views](https://github.com/shntnu/depmap-composed-views), a public personal repository.
@@ -108,6 +118,7 @@ See [Vercel's deployment protection explanation](https://vercel.com/academy/opti
 web/                  React UI, Node API, data snapshots, local bridge and tests
 python/app.py         Private FastAPI query service
 python/notebooks/     Exact copies of the four imported DMX notebooks
+                      and the recorded nb06 session for the marimo preview
 python/catalog.toml   Original catalog metadata and release baseline
 python/uv.lock        Locked Python service dependencies
 vercel.json           Service builds, private binding and public routing
