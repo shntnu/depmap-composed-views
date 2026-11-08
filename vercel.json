@@ -1,0 +1,40 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "services": {
+    "web": {
+      "root": "web",
+      "framework": "express",
+      "entrypoint": "server.mjs",
+      "installCommand": "npm ci",
+      "buildCommand": "npm run build:vercel",
+      "bindings": [
+        {
+          "type": "service",
+          "service": "depmap",
+          "format": "url",
+          "env": "DEPMAP_SERVICE_URL"
+        }
+      ],
+      "functions": {
+        "server.mjs": {
+          "maxDuration": 300,
+          "includeFiles": "{data/*.json,public/**}"
+        }
+      }
+    },
+    "depmap": {
+      "root": "python",
+      "framework": "fastapi",
+      "entrypoint": "app:app",
+      "functions": {
+        "app.py": {
+          "maxDuration": 300,
+          "excludeFiles": "{tests/**,__pycache__/**}"
+        }
+      }
+    }
+  },
+  "rewrites": [
+    { "source": "/(.*)", "destination": { "service": "web" } }
+  ]
+}

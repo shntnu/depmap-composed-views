@@ -1,0 +1,14 @@
+[project]
+name = "depmap-verified-query-service"
+version = "0.1.0"
+requires-python = ">=3.12,<3.14"
+dependencies = [
+    "fastapi==0.117.1",
+    "altair==5.5.0",
+    "marimo==0.23.16",
+    "polars==1.40.1",
+    "requests==2.32.5",
+]
+
+[tool.vercel]
+entrypoint = "app:app"

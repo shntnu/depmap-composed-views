@@ -1,0 +1,50 @@
+name = "dmx"
+description = "DepMap eXplore - agent-composable marimo notebooks over DepMap's public Breadbox REST API for cancer-dependency analysis"
+
+[data]
+surface = "rest"   # rest | duckdb | pooch | files
+version = "26Q1"   # DepMap release the catalog was built against (CRISPR/Chronos_Combined dependency data).
+                   # Breadbox serves the current release and can't be asked for an old one; nb01 checks this
+                   # pin against the live portal and warns on drift. Some Omics tables lag at 24Q4/24Q2.
+cache = ""         # public read-only reads, fetched fresh; no cache
+
+[auth]
+env_var = ""       # Breadbox public reads need no token
+
+[getting_started]
+first_notebook = "nb01_orientation.py"
+
+[[vignette]]
+notebook = "nb01_orientation.py"
+helpers  = ["reach_surface"]
+does     = "Orientation: what DepMap Breadbox exposes, a live dimension-types check, and the questions this catalog answers first"
+
+[[vignette]]
+notebook = "nb02_dataset_discovery.py"
+helpers  = ["bb_get", "bb_post", "records_frame", "list_data_types", "list_dimension_types", "list_datasets", "search_dimensions", "dataset_features"]
+does     = "Breadbox HTTP primitives (User-Agent + 5xx-retry hardened) plus dataset discovery and entity search"
+
+[[vignette]]
+notebook = "nb03_gene_dependency_profile.py"
+helpers  = ["tabular_metadata", "matrix_feature", "gene_dependency_profile", "column_mapping_to_frame"]
+does     = "Gene -> Chronos dependency profile across cell lines, joined to model metadata, ranked by lineage"
+
+[[vignette]]
+notebook = "nb04_context_comparison.py"
+helpers  = ["lineage_context", "mutation_lineage_context", "resolve_context", "dependency_context_table"]
+does     = "Context expression (lineage or mutation) -> compare a gene's dependency inside vs outside the context"
+
+[[vignette]]
+notebook = "nb05_association_query.py"
+helpers  = ["association_query", "association_table", "top_associations"]
+does     = "Gene dependency or drug slice -> precomputed Breadbox associations across modalities, ranked by q-value"
+
+[[vignette]]
+notebook = "index.py"
+helpers  = ["discover_envelopes", "normalize_files", "status_badge"]
+does     = "Discover every data/processed/**/summary.json envelope and render one block each (description, numbers, files); collate data/processed/index.{json,csv}. Computes nothing of its own"
+
+[[vignette]]
+notebook = "nb06_verified_dependency_query.py"
+helpers  = ["exact_record", "checked_dependency_rows", "verified_dependency_query"]
+does     = "Verified gene + lineage -> exact Chronos feature and dataset IDs, reconciled cohort membership, explicit absent/null scores, and JSON evidence with release provenance and row hash"

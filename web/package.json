@@ -1,0 +1,26 @@
+{
+  "name": "depmap-json-render-demo",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node server.mjs",
+    "build": "vite build",
+    "build:vercel": "vite build --outDir public",
+    "start": "node server.mjs --production",
+    "test": "npm run build:vercel && node --test tests/*.test.mjs"
+  },
+  "dependencies": {
+    "@json-render/core": "0.22.0",
+    "@json-render/react": "0.22.0",
+    "@json-render/chat": "0.22.0",
+    "@openrouter/ai-sdk-provider": "3.1.0",
+    "ai": "7.0.165",
+    "chat": "^4.43.0",
+    "express": "^5.1.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": { "vite": "^7.0.0" }
+}

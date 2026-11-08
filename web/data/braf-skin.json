@@ -1,0 +1,1109 @@
+{
+  "schema_version": 1,
+  "query": {
+    "gene": "BRAF",
+    "lineage": "Skin",
+    "expected_release": null
+  },
+  "feature": {
+    "id": "673",
+    "label": "BRAF"
+  },
+  "provenance": {
+    "base_url": "https://depmap.org/portal/breadbox",
+    "started_at_utc": "2026-11-08T17:26:04.896812+00:00",
+    "completed_at_utc": "2026-11-08T17:26:08.348483+00:00",
+    "catalog_release": "26Q1",
+    "datasets": [
+      {
+        "id": "ca558003-70f0-4949-8b2f-667bf30ac22a",
+        "given_id": "Chronos_Combined",
+        "name": "CRISPR (DepMap Public 26Q3+Score, Chronos)",
+        "release": "26Q3",
+        "release_evidence": "DepMap Public 26Q3",
+        "source_file": "CRISPRGeneEffect.csv",
+        "taiga_id": "26q3-public-13a1.3/CRISPRGeneEffect",
+        "version": null
+      },
+      {
+        "id": "9034361b-d4c7-40f6-bf39-edd536c19616",
+        "given_id": "depmap_model_metadata",
+        "name": "depmap_model metadata",
+        "release": "26Q3",
+        "release_evidence": "DepMap Public 26Q3",
+        "source_file": "Model.csv",
+        "taiga_id": "public-26q3-526b.20/Model",
+        "version": null
+      }
+    ],
+    "requests": [
+      {
+        "method": "GET",
+        "endpoint": "datasets/"
+      },
+      {
+        "method": "GET",
+        "endpoint": "datasets/features/ca558003-70f0-4949-8b2f-667bf30ac22a"
+      },
+      {
+        "method": "POST",
+        "endpoint": "datasets/tabular/9034361b-d4c7-40f6-bf39-edd536c19616",
+        "body": {
+          "columns": [
+            "CellLineName",
+            "OncotreeLineage"
+          ]
+        }
+      },
+      {
+        "method": "POST",
+        "endpoint": "temp/context",
+        "body": {
+          "name": "Skin",
+          "dimension_type": "depmap_model",
+          "expr": {
+            "==": [
+              {
+                "var": "lineage"
+              },
+              "Skin"
+            ]
+          },
+          "vars": {
+            "lineage": {
+              "dataset_id": "9034361b-d4c7-40f6-bf39-edd536c19616",
+              "identifier": "OncotreeLineage",
+              "identifier_type": "column"
+            }
+          }
+        }
+      },
+      {
+        "method": "GET",
+        "endpoint": "datasets/samples/ca558003-70f0-4949-8b2f-667bf30ac22a"
+      },
+      {
+        "method": "POST",
+        "endpoint": "datasets/matrix/ca558003-70f0-4949-8b2f-667bf30ac22a?strict=true",
+        "body": {
+          "features": [
+            "673"
+          ],
+          "feature_identifier": "id",
+          "samples": [
+            "ACH-000014",
+            "ACH-000219",
+            "ACH-000274",
+            "ACH-000304",
+            "ACH-000322",
+            "ACH-000348",
+            "ACH-000401",
+            "ACH-000404",
+            "ACH-000425",
+            "ACH-000441",
+            "ACH-000450",
+            "ACH-000458",
+            "ACH-000477",
+            "ACH-000550",
+            "ACH-000579",
+            "ACH-000580",
+            "ACH-000614",
+            "ACH-000632",
+            "ACH-000661",
+            "ACH-000676",
+            "ACH-000765",
+            "ACH-000788",
+            "ACH-000799",
+            "ACH-000801",
+            "ACH-000805",
+            "ACH-000810",
+            "ACH-000822",
+            "ACH-000827",
+            "ACH-000881",
+            "ACH-000882",
+            "ACH-000884",
+            "ACH-000899",
+            "ACH-000915",
+            "ACH-000968",
+            "ACH-001041",
+            "ACH-001190",
+            "ACH-001239",
+            "ACH-001328",
+            "ACH-001442",
+            "ACH-001521",
+            "ACH-001522",
+            "ACH-001523",
+            "ACH-001524",
+            "ACH-001550",
+            "ACH-001551",
+            "ACH-001552",
+            "ACH-001563",
+            "ACH-001566",
+            "ACH-001567",
+            "ACH-001568",
+            "ACH-001570",
+            "ACH-001645",
+            "ACH-001970",
+            "ACH-001972",
+            "ACH-001973",
+            "ACH-001975",
+            "ACH-001982",
+            "ACH-001986",
+            "ACH-001990",
+            "ACH-002001",
+            "ACH-002002",
+            "ACH-002003",
+            "ACH-002004",
+            "ACH-002005",
+            "ACH-002084",
+            "ACH-002143",
+            "ACH-002458",
+            "ACH-002460",
+            "ACH-002461",
+            "ACH-002508",
+            "ACH-002510",
+            "ACH-002511",
+            "ACH-002512",
+            "ACH-002847",
+            "ACH-002928"
+          ],
+          "sample_identifier": "id"
+        }
+      }
+    ]
+  },
+  "matrix_requested": true,
+  "units": "Gene Effect (Chronos)",
+  "interpretation": "More negative Chronos gene effect indicates stronger dependency; missing values are not zero.",
+  "counts": {
+    "cohort": 152,
+    "present_in_dataset": 75,
+    "observed": 75,
+    "null_score": 0,
+    "absent_from_dataset": 77
+  },
+  "checks": {
+    "context_matches_metadata": true,
+    "matrix_ids_match_request": true
+  },
+  "warnings": [
+    "Chronos_Combined: observed release '26Q3'; catalog baseline 26Q1.",
+    "depmap_model_metadata: observed release '26Q3'; catalog baseline 26Q1."
+  ],
+  "limits": "Live calls are not an atomic or immutable snapshot. The hash identifies these rows, not a historical API version.",
+  "rows_sha256": "d317574cf7ff39d62733eb07c3f619d2e690e605ef08594a5105a69d74bc6ccd",
+  "rows": [
+    {
+      "depmap_id": "ACH-000008",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "A101D"
+    },
+    {
+      "depmap_id": "ACH-000014",
+      "dependency": -1.8393490905,
+      "status": "observed",
+      "cell_line_name": "Hs 294T"
+    },
+    {
+      "depmap_id": "ACH-000219",
+      "dependency": -1.3540571696,
+      "status": "observed",
+      "cell_line_name": "A-375"
+    },
+    {
+      "depmap_id": "ACH-000274",
+      "dependency": -0.3918531798,
+      "status": "observed",
+      "cell_line_name": "Hs 852.T"
+    },
+    {
+      "depmap_id": "ACH-000304",
+      "dependency": -1.1159178858,
+      "status": "observed",
+      "cell_line_name": "WM-115"
+    },
+    {
+      "depmap_id": "ACH-000322",
+      "dependency": -1.3161564208,
+      "status": "observed",
+      "cell_line_name": "HT-144"
+    },
+    {
+      "depmap_id": "ACH-000348",
+      "dependency": -0.6586389872,
+      "status": "observed",
+      "cell_line_name": "RPMI-7951"
+    },
+    {
+      "depmap_id": "ACH-000401",
+      "dependency": -1.0375152665,
+      "status": "observed",
+      "cell_line_name": "COLO-800"
+    },
+    {
+      "depmap_id": "ACH-000404",
+      "dependency": -0.7772214282,
+      "status": "observed",
+      "cell_line_name": "K029AX"
+    },
+    {
+      "depmap_id": "ACH-000423",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "SK-MEL-3"
+    },
+    {
+      "depmap_id": "ACH-000425",
+      "dependency": -2.4384161687,
+      "status": "observed",
+      "cell_line_name": "UACC-62"
+    },
+    {
+      "depmap_id": "ACH-000441",
+      "dependency": -2.3496281611,
+      "status": "observed",
+      "cell_line_name": "SH-4"
+    },
+    {
+      "depmap_id": "ACH-000450",
+      "dependency": -1.2682582679,
+      "status": "observed",
+      "cell_line_name": "MEL-HO"
+    },
+    {
+      "depmap_id": "ACH-000458",
+      "dependency": -0.0426239798,
+      "status": "observed",
+      "cell_line_name": "CJM"
+    },
+    {
+      "depmap_id": "ACH-000465",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "SK-MEL-1"
+    },
+    {
+      "depmap_id": "ACH-000477",
+      "dependency": -2.4095698411,
+      "status": "observed",
+      "cell_line_name": "Malme-3M"
+    },
+    {
+      "depmap_id": "ACH-000550",
+      "dependency": -1.1957225812,
+      "status": "observed",
+      "cell_line_name": "IGR-39"
+    },
+    {
+      "depmap_id": "ACH-000572",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "G-361"
+    },
+    {
+      "depmap_id": "ACH-000579",
+      "dependency": -1.3865593872,
+      "status": "observed",
+      "cell_line_name": "UACC-257"
+    },
+    {
+      "depmap_id": "ACH-000580",
+      "dependency": -1.2339326385,
+      "status": "observed",
+      "cell_line_name": "C32"
+    },
+    {
+      "depmap_id": "ACH-000582",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "COLO 741"
+    },
+    {
+      "depmap_id": "ACH-000614",
+      "dependency": -2.6220239797,
+      "status": "observed",
+      "cell_line_name": "RVH-421"
+    },
+    {
+      "depmap_id": "ACH-000615",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "SK-MEL-28"
+    },
+    {
+      "depmap_id": "ACH-000632",
+      "dependency": -0.0812387766,
+      "status": "observed",
+      "cell_line_name": "Hs 944.T"
+    },
+    {
+      "depmap_id": "ACH-000640",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "SK-MEL-31"
+    },
+    {
+      "depmap_id": "ACH-000644",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "COLO 829"
+    },
+    {
+      "depmap_id": "ACH-000650",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "IGR-37"
+    },
+    {
+      "depmap_id": "ACH-000661",
+      "dependency": -1.2670722984,
+      "status": "observed",
+      "cell_line_name": "WM1799"
+    },
+    {
+      "depmap_id": "ACH-000676",
+      "dependency": -1.8423547301,
+      "status": "observed",
+      "cell_line_name": "LN-464"
+    },
+    {
+      "depmap_id": "ACH-000730",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "SK-MEL-5"
+    },
+    {
+      "depmap_id": "ACH-000750",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "LOX IMVI"
+    },
+    {
+      "depmap_id": "ACH-000765",
+      "dependency": -2.0799841538,
+      "status": "observed",
+      "cell_line_name": "WM983B"
+    },
+    {
+      "depmap_id": "ACH-000788",
+      "dependency": -1.0156107636,
+      "status": "observed",
+      "cell_line_name": "A2058"
+    },
+    {
+      "depmap_id": "ACH-000799",
+      "dependency": -1.3462030483,
+      "status": "observed",
+      "cell_line_name": "Hs 695T"
+    },
+    {
+      "depmap_id": "ACH-000801",
+      "dependency": -1.3169759369,
+      "status": "observed",
+      "cell_line_name": "Hs 936.T"
+    },
+    {
+      "depmap_id": "ACH-000805",
+      "dependency": -1.0073420124,
+      "status": "observed",
+      "cell_line_name": "COLO-679"
+    },
+    {
+      "depmap_id": "ACH-000810",
+      "dependency": -1.1983491315,
+      "status": "observed",
+      "cell_line_name": "SK-MEL-30"
+    },
+    {
+      "depmap_id": "ACH-000812",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "COLO-783"
+    },
+    {
+      "depmap_id": "ACH-000814",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "Hs 939.T"
+    },
+    {
+      "depmap_id": "ACH-000822",
+      "dependency": -1.0862989767,
+      "status": "observed",
+      "cell_line_name": "SK-MEL-24"
+    },
+    {
+      "depmap_id": "ACH-000827",
+      "dependency": -1.7907268649,
+      "status": "observed",
+      "cell_line_name": "WM793"
+    },
+    {
+      "depmap_id": "ACH-000881",
+      "dependency": -0.0052867469,
+      "status": "observed",
+      "cell_line_name": "MEL-JUSO"
+    },
+    {
+      "depmap_id": "ACH-000882",
+      "dependency": -1.0424683565,
+      "status": "observed",
+      "cell_line_name": "IGR-1"
+    },
+    {
+      "depmap_id": "ACH-000884",
+      "dependency": -1.1973337202,
+      "status": "observed",
+      "cell_line_name": "MDA-MB-435S"
+    },
+    {
+      "depmap_id": "ACH-000899",
+      "dependency": -0.6287697282,
+      "status": "observed",
+      "cell_line_name": "WM88"
+    },
+    {
+      "depmap_id": "ACH-000915",
+      "dependency": -0.3971544099,
+      "status": "observed",
+      "cell_line_name": "IPC-298"
+    },
+    {
+      "depmap_id": "ACH-000931",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "HMCB"
+    },
+    {
+      "depmap_id": "ACH-000968",
+      "dependency": -0.3522049358,
+      "status": "observed",
+      "cell_line_name": "COLO 792"
+    },
+    {
+      "depmap_id": "ACH-000987",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "MeWo"
+    },
+    {
+      "depmap_id": "ACH-001002",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "451Lu"
+    },
+    {
+      "depmap_id": "ACH-001019",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "BroLi"
+    },
+    {
+      "depmap_id": "ACH-001024",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "CHL-1"
+    },
+    {
+      "depmap_id": "ACH-001041",
+      "dependency": -0.1328192245,
+      "status": "observed",
+      "cell_line_name": "CHL-1-DM"
+    },
+    {
+      "depmap_id": "ACH-001044",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "COLO 818"
+    },
+    {
+      "depmap_id": "ACH-001045",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "COLO 849"
+    },
+    {
+      "depmap_id": "ACH-001122",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "MKL-1"
+    },
+    {
+      "depmap_id": "ACH-001123",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "MKL-2"
+    },
+    {
+      "depmap_id": "ACH-001131",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "MS-1"
+    },
+    {
+      "depmap_id": "ACH-001170",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "PeTa"
+    },
+    {
+      "depmap_id": "ACH-001190",
+      "dependency": -0.5192322508,
+      "status": "observed",
+      "cell_line_name": "SK-MEL-2"
+    },
+    {
+      "depmap_id": "ACH-001235",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "WaGa"
+    },
+    {
+      "depmap_id": "ACH-001239",
+      "dependency": -1.7604900093,
+      "status": "observed",
+      "cell_line_name": "WM-266-4"
+    },
+    {
+      "depmap_id": "ACH-001328",
+      "dependency": 0.0125934876,
+      "status": "observed",
+      "cell_line_name": "A-431"
+    },
+    {
+      "depmap_id": "ACH-001339",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "Colo 794"
+    },
+    {
+      "depmap_id": "ACH-001442",
+      "dependency": -0.0081075946,
+      "status": "observed",
+      "cell_line_name": "A388"
+    },
+    {
+      "depmap_id": "ACH-001521",
+      "dependency": -0.3668169431,
+      "status": "observed",
+      "cell_line_name": "HKA-1"
+    },
+    {
+      "depmap_id": "ACH-001522",
+      "dependency": -1.7445336202,
+      "status": "observed",
+      "cell_line_name": "HMY-1"
+    },
+    {
+      "depmap_id": "ACH-001523",
+      "dependency": 0.0164828083,
+      "status": "observed",
+      "cell_line_name": "HSC-1"
+    },
+    {
+      "depmap_id": "ACH-001524",
+      "dependency": -0.1404286614,
+      "status": "observed",
+      "cell_line_name": "HSC-5"
+    },
+    {
+      "depmap_id": "ACH-001550",
+      "dependency": -0.2495904537,
+      "status": "observed",
+      "cell_line_name": "MCC13"
+    },
+    {
+      "depmap_id": "ACH-001551",
+      "dependency": -0.1847925108,
+      "status": "observed",
+      "cell_line_name": "MCC14/2"
+    },
+    {
+      "depmap_id": "ACH-001552",
+      "dependency": -0.1481090049,
+      "status": "observed",
+      "cell_line_name": "MCC26"
+    },
+    {
+      "depmap_id": "ACH-001563",
+      "dependency": -1.0081524389,
+      "status": "observed",
+      "cell_line_name": "MM127"
+    },
+    {
+      "depmap_id": "ACH-001566",
+      "dependency": -1.2858829822,
+      "status": "observed",
+      "cell_line_name": "MM370"
+    },
+    {
+      "depmap_id": "ACH-001567",
+      "dependency": -1.5033289888,
+      "status": "observed",
+      "cell_line_name": "MM383"
+    },
+    {
+      "depmap_id": "ACH-001568",
+      "dependency": -1.218651161,
+      "status": "observed",
+      "cell_line_name": "MM386"
+    },
+    {
+      "depmap_id": "ACH-001569",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "MM415"
+    },
+    {
+      "depmap_id": "ACH-001570",
+      "dependency": -1.3885717518,
+      "status": "observed",
+      "cell_line_name": "MM426"
+    },
+    {
+      "depmap_id": "ACH-001645",
+      "dependency": -1.7123916036,
+      "status": "observed",
+      "cell_line_name": "SEKI"
+    },
+    {
+      "depmap_id": "ACH-001704",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "VMRC-MELG"
+    },
+    {
+      "depmap_id": "ACH-001949",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "MA-MEL-46"
+    },
+    {
+      "depmap_id": "ACH-001953",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "MA-MEL-27"
+    },
+    {
+      "depmap_id": "ACH-001970",
+      "dependency": -1.8575748957,
+      "status": "observed",
+      "cell_line_name": "MM253"
+    },
+    {
+      "depmap_id": "ACH-001971",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "MM466"
+    },
+    {
+      "depmap_id": "ACH-001972",
+      "dependency": -1.4287300832,
+      "status": "observed",
+      "cell_line_name": "MM473"
+    },
+    {
+      "depmap_id": "ACH-001973",
+      "dependency": -0.1497540898,
+      "status": "observed",
+      "cell_line_name": "MM485"
+    },
+    {
+      "depmap_id": "ACH-001974",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "MM537"
+    },
+    {
+      "depmap_id": "ACH-001975",
+      "dependency": -1.6233891718,
+      "status": "observed",
+      "cell_line_name": "MM576"
+    },
+    {
+      "depmap_id": "ACH-001976",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "MM603"
+    },
+    {
+      "depmap_id": "ACH-001978",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "NZM1"
+    },
+    {
+      "depmap_id": "ACH-001979",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "NZM11"
+    },
+    {
+      "depmap_id": "ACH-001980",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "NZM12"
+    },
+    {
+      "depmap_id": "ACH-001981",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "NZM2"
+    },
+    {
+      "depmap_id": "ACH-001982",
+      "dependency": -1.6512052674,
+      "status": "observed",
+      "cell_line_name": "NZM3"
+    },
+    {
+      "depmap_id": "ACH-001983",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "NZM30"
+    },
+    {
+      "depmap_id": "ACH-001984",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "NZM4"
+    },
+    {
+      "depmap_id": "ACH-001985",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "NZM40"
+    },
+    {
+      "depmap_id": "ACH-001986",
+      "dependency": -0.0079863249,
+      "status": "observed",
+      "cell_line_name": "NZM42"
+    },
+    {
+      "depmap_id": "ACH-001987",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "NZM43"
+    },
+    {
+      "depmap_id": "ACH-001988",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "NZM5"
+    },
+    {
+      "depmap_id": "ACH-001989",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "NZM6"
+    },
+    {
+      "depmap_id": "ACH-001990",
+      "dependency": -1.2843237923,
+      "status": "observed",
+      "cell_line_name": "NZM7"
+    },
+    {
+      "depmap_id": "ACH-002001",
+      "dependency": -1.0031425997,
+      "status": "observed",
+      "cell_line_name": "A-375_DAB_TRAM_R"
+    },
+    {
+      "depmap_id": "ACH-002002",
+      "dependency": -1.1172850986,
+      "status": "observed",
+      "cell_line_name": "A-375_SCH772984_R"
+    },
+    {
+      "depmap_id": "ACH-002003",
+      "dependency": -0.3102047239,
+      "status": "observed",
+      "cell_line_name": "A-375_DAB_R"
+    },
+    {
+      "depmap_id": "ACH-002004",
+      "dependency": -0.9443282987,
+      "status": "observed",
+      "cell_line_name": "UACC-62_DAB_TRAM_R"
+    },
+    {
+      "depmap_id": "ACH-002005",
+      "dependency": -1.2626081403,
+      "status": "observed",
+      "cell_line_name": "SK-MEL-19"
+    },
+    {
+      "depmap_id": "ACH-002084",
+      "dependency": -1.5140861812,
+      "status": "observed",
+      "cell_line_name": "MMAc"
+    },
+    {
+      "depmap_id": "ACH-002096",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "CP50-MEL-B"
+    },
+    {
+      "depmap_id": "ACH-002097",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "CP66-MEL"
+    },
+    {
+      "depmap_id": "ACH-002098",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "CP67-MEL"
+    },
+    {
+      "depmap_id": "ACH-002100",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "DJM-1"
+    },
+    {
+      "depmap_id": "ACH-002121",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "G-MEL"
+    },
+    {
+      "depmap_id": "ACH-002143",
+      "dependency": -0.4916958182,
+      "status": "observed",
+      "cell_line_name": "IST-MEL1"
+    },
+    {
+      "depmap_id": "ACH-002147",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "K2"
+    },
+    {
+      "depmap_id": "ACH-002152",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "LB2518-MEL"
+    },
+    {
+      "depmap_id": "ACH-002153",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "LB373-MEL-D"
+    },
+    {
+      "depmap_id": "ACH-002159",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "M14"
+    },
+    {
+      "depmap_id": "ACH-002162",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "MMAC-SF"
+    },
+    {
+      "depmap_id": "ACH-002165",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "MZ2-MEL"
+    },
+    {
+      "depmap_id": "ACH-002166",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "MZ7-mel"
+    },
+    {
+      "depmap_id": "ACH-002205",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "WM1552C"
+    },
+    {
+      "depmap_id": "ACH-002206",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "WM278"
+    },
+    {
+      "depmap_id": "ACH-002207",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "WM35"
+    },
+    {
+      "depmap_id": "ACH-002338",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "M980513"
+    },
+    {
+      "depmap_id": "ACH-002386",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "M00921"
+    },
+    {
+      "depmap_id": "ACH-002387",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "M1203273"
+    },
+    {
+      "depmap_id": "ACH-002388",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "MET2B"
+    },
+    {
+      "depmap_id": "ACH-002403",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "CCLF_MELM_0001_T"
+    },
+    {
+      "depmap_id": "ACH-002404",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "CCLF_MELM_0002_T"
+    },
+    {
+      "depmap_id": "ACH-002405",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "CCLF_MELM_0003_T"
+    },
+    {
+      "depmap_id": "ACH-002407",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "CCLF_MELM_0005_T"
+    },
+    {
+      "depmap_id": "ACH-002458",
+      "dependency": -0.8082732704,
+      "status": "observed",
+      "cell_line_name": "HT-144_DAB_R"
+    },
+    {
+      "depmap_id": "ACH-002459",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "HT-144_DAB_TRAM_R"
+    },
+    {
+      "depmap_id": "ACH-002460",
+      "dependency": -0.9837957265,
+      "status": "observed",
+      "cell_line_name": "HT-144_DAB_ROX_R"
+    },
+    {
+      "depmap_id": "ACH-002461",
+      "dependency": 0.5603025211,
+      "status": "observed",
+      "cell_line_name": "RVH421_DAB_R"
+    },
+    {
+      "depmap_id": "ACH-002508",
+      "dependency": -0.3100830515,
+      "status": "observed",
+      "cell_line_name": "WM3211"
+    },
+    {
+      "depmap_id": "ACH-002509",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "WM4235"
+    },
+    {
+      "depmap_id": "ACH-002510",
+      "dependency": -1.6032536863,
+      "status": "observed",
+      "cell_line_name": "M040416"
+    },
+    {
+      "depmap_id": "ACH-002511",
+      "dependency": -0.1567617098,
+      "status": "observed",
+      "cell_line_name": "M104325"
+    },
+    {
+      "depmap_id": "ACH-002512",
+      "dependency": 0.1380159482,
+      "status": "observed",
+      "cell_line_name": "MM160113"
+    },
+    {
+      "depmap_id": "ACH-002797",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "NCC-DFSP1-C1"
+    },
+    {
+      "depmap_id": "ACH-002798",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "NCC-DFSP2-C1"
+    },
+    {
+      "depmap_id": "ACH-002846",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "YUSEEP-M 16-3517"
+    },
+    {
+      "depmap_id": "ACH-002847",
+      "dependency": -0.1159342822,
+      "status": "observed",
+      "cell_line_name": "YUHOIN"
+    },
+    {
+      "depmap_id": "ACH-002928",
+      "dependency": 0.0192415534,
+      "status": "observed",
+      "cell_line_name": "MM100511"
+    },
+    {
+      "depmap_id": "ACH-003105",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "VMM917"
+    },
+    {
+      "depmap_id": "ACH-003455",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "CCLF_MELM_0004_T"
+    },
+    {
+      "depmap_id": "ACH-003456",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "CCLF_MELM_0006_T"
+    },
+    {
+      "depmap_id": "ACH-003457",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "CCLF_MELM_0038_T"
+    },
+    {
+      "depmap_id": "ACH-003458",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "CCLF_MELM_0010_T"
+    },
+    {
+      "depmap_id": "ACH-003459",
+      "dependency": null,
+      "status": "absent_from_dataset",
+      "cell_line_name": "CCLF_MELM_0011_T"
+    }
+  ]
+}
