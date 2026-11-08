@@ -1,4 +1,4 @@
-# DepMap composed views
+# From Notebooks to Structured Interfaces: A DepMap Experiment
 
 This prototype explores two bets for working with a scientific agent: an executable notebook as the shared workspace, and a structured interface assembled over reusable analysis functions.
 It makes the comparison concrete with one DepMap query for a gene within a lineage.

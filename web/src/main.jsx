@@ -165,7 +165,7 @@ function App() {
   const presets = [{ id: 'overview', label: 'Overview' }, { id: 'ranked', label: 'Top dependencies' }, { id: 'missing', label: 'Missing scores' }, { id: 'evidence', label: 'Source evidence' }];
   return <div className="app-shell"><header className="masthead"><a href="/" className="brand"><span className="brand-mark" aria-hidden="true"><i /><i /><i /></span><strong>DepMap</strong><span>Composed views</span></a><a className="source-link" href="https://vercel.com/changelog/json-render-and-chat-sdk-agents" target="_blank" rel="noreferrer">Inspired by json-render</a></header>
     <section className="experiment-intro" aria-labelledby="experiment-title">
-      <h1 id="experiment-title">Two bets for working with a scientific agent</h1>
+      <h1 id="experiment-title">From Notebooks to Structured Interfaces: A DepMap Experiment</h1>
       <div className="experiment-story">
         <p>Scientists need to inspect an agent's work and keep exploring after its first answer. <a href="https://github.com/broadinstitute/jx" target="_blank" rel="noreferrer">JX</a>, a project for exploring JUMP Cell Painting data, makes one bet: the notebook itself can be the interface between the scientist and the agent.</p>
         <p>In <a href="https://github.com/broadinstitute/jx/blob/main/PLAN.md#hypothesis" target="_blank" rel="noreferrer">JX's notebook approach</a>, an agent draws on a catalog of reusable analyses, writes Python cells, and runs them in a marimo notebook. Code, explanations, and outputs stay together in a document the scientist can inspect and rerun. Follow-up questions can extend that notebook with more cells.</p>
