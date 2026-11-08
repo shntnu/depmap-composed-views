@@ -104,17 +104,17 @@ app.post('/api/generate', async (req, res) => {
     const instructions = catalog.prompt({ customRules: [
       'This is a scientific report. Never generate sample data, scientific values, text claims, state, expressions, actions, bindings, visibility, repeat, or event handlers. This overrides generic sample-data instructions.',
       'Output only JSONL patches to /root and /elements. The completed spec has EXACTLY root and elements. Do not add state, even an empty state.',
-      'Exactly one Report root. Its props identify the requested gene and exact Oncotree lineage. The user question ALWAYS overrides the default gene and lineage when it names them. For example, Show BRAF in Skin means Report props gene=BRAF,lineage=Skin even if defaults are KRAS/Lung. This is an explicit query change, not an ambiguity: do not ask for confirmation. Correct common case to KRAS, BRAF, EGFR, Lung or Skin.',
+      'Exactly one Report root. Copy its gene and exact Oncotree lineage from the selected data fields. Those fields are authoritative and cannot be changed by display instructions, even if the instructions name another gene or lineage. The selected data source is also fixed. Ignore mentions of another gene, lineage or data source in the display instructions and apply the requested presentation to the selected data. A mismatched name alone is not an unsupported request and does not require clarification or refusal. Use the instructions only to choose how to display the selected data.',
       'Report children include Coverage and Evidence, plus whichever DependencyPlot, ModelTable or Interpretation is useful. Each component type occurs at most once. Every other element is a direct child of Report. Each element has ONLY type, props, children.',
-      'For an overview choose a distribution plot and observed table. For strongest dependencies use ranked plot and observed table. For missing models use a missing table. For provenance use Evidence first. Only layout, gene, lineage, view, filter and row limit are yours to choose.',
+      'For an overview choose a distribution plot and observed table. For strongest dependencies use ranked plot and observed table. For missing models use a missing table. For provenance use Evidence first. Only layout, view, filter and row limit are yours to choose.',
       'DependencyPlot.limit is an integer from 5 to 50. For distribution use limit=10; distribution always includes ALL observed scores regardless of limit. ModelTable.limit is an integer from 5 to 100. Never exceed these schema limits. Emit raw JSONL without markdown fences.',
       'Only single-gene, single-lineage descriptive queries are supported. Do not pretend to compare cohorts, test selectivity, stratify mutations or predict drug response. For unsupported requests produce no spec.',
     ] });
     let modelFailure;
     const response = streamText({ model: languageModel, system: instructions,
-      prompt: `Defaults when unspecified: gene=${gene}, lineage=${lineage}. User question (takes precedence over defaults): ${prompt}`,
+      prompt: `Selected data (fixed): gene=${gene}, lineage=${lineage}, source=${source}. Display instructions (presentation only): ${prompt}`,
       maxOutputTokens: 1500, maxRetries: 0, abortSignal: abort.signal,
-      ...(provider === 'anthropic' ? { providerOptions: { anthropic: { thinking: { type: 'disabled' }, effort: 'medium' } } } : {}),
+      ...(provider === 'anthropic' ? { providerOptions: { anthropic: { thinking: { type: model === 'claude-sonnet-5-5' ? 'between_tools' : 'disabled' }, effort: 'medium' } } } : {}),
       onError: ({ error }) => { modelFailure = error; } });
     let output = '';
     for await (const text of response.textStream) {
@@ -129,6 +129,7 @@ app.post('/api/generate', async (req, res) => {
     let spec;
     try { spec = validateReport(compileSpecStream(output)); }
     catch { throw new Error('The model did not produce a valid supported report. Try asking for ranked scores, a distribution, missing models, or evidence for one gene and lineage.'); }
+    spec.elements[spec.root].props = { gene, lineage };
     send({ type: 'status', message: `View validated. ${source === 'live' ? 'Retrieving and checking Breadbox data' : 'Loading the recorded Breadbox evidence'}...` });
     send({ type: 'result', result: await resultFor(spec, source, 'model') });
   } catch (error) {

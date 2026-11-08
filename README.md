@@ -9,13 +9,16 @@ The source repository is [shntnu/depmap-composed-views](https://github.com/shntn
 
 ## Try it
 
-Choose **Retrieve from Breadbox** and ask:
+Set **Gene symbol** to `BRAF`, **Lineage** to `Skin`, and **Data source** to **Retrieve from Breadbox**.
+Then describe the display:
 
-> Show the distribution of BRAF dependency in Skin, with cohort coverage and source evidence.
+> Show a distribution, cohort coverage, and source evidence.
 No table.
 
 Or keep **Saved verified snapshot** and try KRAS/Lung, EGFR/Lung, or BRAF/Skin without waiting for upstream retrieval.
-Presets work without a model connection.
+The fields determine the data; display instructions only choose the presentation.
+Naming another gene or lineage in the text does not change the selected query.
+Presets use the selected fields, ignore the display instructions, and work without a model connection.
 The **UI specification** tab shows the validated component tree.
 The **Chat card** tab previews the same selected components through `@json-render/chat`; it does not send messages to a chat service.
 Download the evidence to inspect all cohort models, missingness, exact requests, dataset releases and the reported row hash.
@@ -31,9 +34,11 @@ npm --prefix web run dev
 ```
 
 Open <http://127.0.0.1:4317/>. To use Anthropic directly, set `AI_PROVIDER=anthropic` and supply `ANTHROPIC_API_KEY` through the process environment before starting the server.
-The direct Anthropic default is `claude-haiku-5-5`; `AI_MODEL` can select another supported Anthropic model.
+Set `AI_MODEL=claude-sonnet-5-5` to match the hosted demo.
+If `AI_MODEL` is omitted, the direct Anthropic default remains `claude-haiku-5-5`.
 Keep credentials out of files and frontend variables.
-Requests are capped at 1,500 output tokens, with thinking disabled for this short composition task, and model failures are shown explicitly.
+Requests are capped at 1,500 output tokens, and model failures are shown explicitly.
+Sonnet 5.5 uses medium effort without upfront thinking for this short composition task.
 
 When `AI_PROVIDER` is omitted, the original defaults remain: local runs use `OPENROUTER_API_KEY`, and Vercel deployments use AI Gateway.
 Those defaults use `anthropic/claude-haiku-4.5`, overridden by `AI_MODEL` or `OPENROUTER_MODEL`.
@@ -63,7 +68,7 @@ Its `DEPMAP_SERVICE_URL` binding reaches the private Python `depmap` service, wh
 Vercel Services is currently Beta.
 The web service explicitly serves built assets because the service rewrite routes asset requests through Express.
 
-The production demo uses `AI_PROVIDER=anthropic`, `AI_MODEL=claude-haiku-5-5`, and a server-only `ANTHROPIC_API_KEY` stored in the project's production environment.
+The production demo uses `AI_PROVIDER=anthropic`, `AI_MODEL=claude-sonnet-5-5`, and a server-only `ANTHROPIC_API_KEY` stored in the project's production environment.
 Model calls go directly to Anthropic and use the selected Anthropic account's credits or billing.
 They do not use Vercel AI Gateway credits or silently fall back to another billing account.
 Vercel still hosts the application and its Python service.
