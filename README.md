@@ -1,11 +1,26 @@
 # DepMap composed views
 
-A working [json-render](https://json-render.dev/) interface over a verified DepMap dependency query.
-The model chooses the report's components, while Python notebook helpers supply every measurement and its evidence.
-Inspired by Vercel's [json-render and Chat SDK announcement](https://vercel.com/changelog/json-render-and-chat-sdk-agents).
+A prototype that lets a language model choose how to present one notebook's DepMap results.
+It supports one gene within one lineage and descriptive dependency scores.
+It is a working interface experiment, not the full DepMap portal or a system that creates new analyses.
 
-[Open the demo](https://depmap-composed-views.vercel.app/) while signed into the authorized Vercel account.
+Researchers may want a distribution, a ranked table, or a report of missing scores from the same analysis.
+Changing that presentation in a notebook can mean editing code.
+We built this prototype to test whether a language model could choose the presentation while the notebook retrieves and checks the data.
+
+The demo uses [Verified DepMap retrieval (nb06)](python/notebooks/nb06_verified_dependency_query.py) from DMX, a catalog of reusable analysis notebooks.
+The notebook retrieves published dependency scores for one gene within one lineage, checks cell-line identifiers and missing scores, and records the data sources.
+The model selects from a small set of display components; the notebook supplies the measurements, and fixed application code draws the charts.
+The result is a report built from the same query, with downloadable source evidence.
+New analyses still need additional notebook code.
+
+The interface uses [json-render](https://json-render.dev/) and was inspired by Vercel's [json-render and Chat SDK announcement](https://vercel.com/changelog/json-render-and-chat-sdk-agents).
 The source repository is [shntnu/depmap-composed-views](https://github.com/shntnu/depmap-composed-views), a public personal repository.
+
+[Open the public demo](https://depmap-composed-views.vercel.app/).
+The production address does not require Vercel sign-in.
+**Compose view** uses the demo operator's Anthropic account; visitors do not supply an API key.
+Presets do not make model calls.
 
 ## Try it
 
@@ -78,9 +93,14 @@ For other installations, omitting `AI_PROVIDER` preserves Vercel AI Gateway with
 That mode requires project OIDC and available Gateway credits; `AI_PROVIDER=gateway` also selects it explicitly.
 `AI_PROVIDER=openrouter` explicitly selects the original OpenRouter connection.
 
-Keep Vercel Authentication enabled to control access to hosted model calls.
+The deployed project currently uses Vercel Standard Protection (`all_except_custom_domains`).
+That setting protects generated deployment and preview addresses but leaves the main production address public, including its model endpoint.
+Anyone who can reach that address can invoke model calls funded by the configured Anthropic account.
+The API key remains server-only; the application does not implement visitor authentication or a per-user spending limit.
 The server's busy flag limits one running instance, not total account spending.
 Same-origin checks and schema validation are not user authentication.
+To require sign-in on the production address, explicitly configure Vercel Authentication for All Deployments or add application-level authentication.
+See [Vercel's deployment protection explanation](https://vercel.com/academy/optimize-your-vercel-account/deployment-protection).
 
 ## Repository layout
 
