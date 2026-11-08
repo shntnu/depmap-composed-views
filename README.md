@@ -4,7 +4,7 @@ This prototype explores two bets for working with a scientific agent: an executa
 It makes the comparison concrete with one DepMap query for a gene within a lineage.
 
 Scientists need to inspect an agent's work and keep exploring after its first answer.
-[JX](https://github.com/broadinstitute/jx), a project for exploring JUMP Cell Painting data, makes one bet: the notebook can be the place to read an analysis, interact with it, and produce the next one.
+[JX](https://github.com/broadinstitute/jx), a project for exploring JUMP Cell Painting data, makes one bet: the notebook itself can be the interface between the scientist and the agent.
 
 In [JX's notebook approach](https://github.com/broadinstitute/jx/blob/main/PLAN.md#hypothesis), an agent draws on a catalog of reusable analyses, writes Python cells, and runs them in a marimo notebook.
 Code, explanations, and outputs stay together in a document the scientist can inspect and rerun.
